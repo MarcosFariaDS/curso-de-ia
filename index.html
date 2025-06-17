@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vídeos Virais com IA</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #e2e8f0;
+      line-height: 1.7;
+      overflow-x: hidden;
+
+      /* Dark background with subtle green overlay */
+      background: linear-gradient(135deg, #0a0f0a 0%, #1a251a 50%, #0f1a0f 100%);
+      min-height: 100vh;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      color: #333;
+      line-height: 1.6;
+
+      /* imagem de fundo */
+      background-image: url('https://i.imgur.com/cHb5PTR.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a4d1a 0%, #2d5a2d 100%);
+      color: white;
+      padding: 80px 0 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      opacity: 0.3;
+    }
+
+    header .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      font-weight: 800;
+      background: linear-gradient(45deg, #ffffff, #a7f3d0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      line-height: 1.2;
+    }
+
+    header p {
+      font-size: 1.4rem;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      opacity: 0.95;
+      font-weight: 400;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .cta-button {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      padding: 18px 45px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border-radius: 50px;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4);
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
+    }
+
+    .banner {
+      display: block;
+      width: 100%;
+      max-height: 500px;
+      object-fit: cover;
+      margin-bottom: 80px;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    section {
+      max-width: 1000px;
+      margin: 0 auto 80px;
+      padding: 0 20px;
+    }
+
+    .feature-section {
+      background: #1f2937;
+      border-radius: 20px;
+      padding: 50px 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      margin-bottom: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #22c55e, #16a34a);
+    }
+
+    section h2 {
+      font-size: 2.5rem;
+      color: #f9fafb;
+      margin-bottom: 30px;
+      font-weight: 700;
+      text-align: center;
+      position: relative;
+    }
+
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #22c55e, #16a34a);
+      border-radius: 2px;
+    }
+
+    ul {
+      padding: 0;
+      font-size: 1.2rem;
+      list-style: none;
+      margin: 0;
+      display: grid;
+      gap: 20px;
+    }
+
+    ul li {
+      background: linear-gradient(135deg, #374151, #4b5563);
+      padding: 20px 25px;
+      border-radius: 12px;
+      position: relative;
+      padding-left: 60px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 4px solid #10b981;
+      color: #f9fafb;
+    }
+
+    ul li:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    ul li::before {
+      content: "🚀";
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.5rem;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-section {
+      background: linear-gradient(135deg, #1a4d1a, #2d5a2d);
+      color: white;
+      text-align: center;
+    }
+
+    .about-section h2 {
+      color: white;
+    }
+
+    .about-section h2::after {
+      background: white;
+    }
+
+    section p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      color: inherit;
+      line-height: 1.8;
+    }
+
+    .final-cta {
+      text-align: center;
+      background: #1f2937;
+      border-radius: 20px;
+      padding: 60px 40px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      margin-bottom: 80px;
+    }
+
+    .final-cta .cta-button {
+      font-size: 1.4rem;
+      padding: 20px 50px;
+    }
+
+    footer {
+      background: linear-gradient(135deg, #111827, #1f2937);
+      color: #d1d5db;
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.95rem;
+      border-top: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+
+      header p {
+        font-size: 1.2rem;
+      }
+
+      section h2 {
+        font-size: 2rem;
+      }
+
+      .cta-button {
+        font-size: 1.1rem;
+        padding: 16px 35px;
+      }
+
+      .feature-section {
+        padding: 40px 25px;
+        margin-bottom: 30px;
+      }
+
+      ul li {
+        padding: 18px 20px 18px 55px;
+      }
+
+      .banner {
+        border-radius: 15px;
+        margin-bottom: 60px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 60px 0 40px;
+      }
+
+      header h1 {
+        font-size: 2rem;
+      }
+
+      .feature-section {
+        padding: 30px 20px;
+      }
+
+      .final-cta {
+        padding: 40px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Descubra como Criar Vídeos que Viralizam com IA</h1>
+      <p>Mesmo que você nunca tenha editado na vida, eu vou te mostrar o passo a passo para criar vídeos emocionantes e
+        lucrar com isso.</p>
+      <a href="https://pay.kiwify.com.br/NJzXZCj" target="_blank" class="cta-button">Quero Começar
+        Agora</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+  </div>
+
+  <section class="feature-section">
+    <h2>O que você vai aprender:</h2>
+    <ul>
+      <li>Como usar IA para criar vídeos com impacto real</li>
+      <li>Como viralizar no TikTok e YouTube Shorts</li>
+      <li>Como criar personagens e histórias que conectam</li>
+      <li>Como editar facilmente com Veo 3 e outras ferramentas</li>
+    </ul>
+  </section>
+
+  <section class="feature-section about-section">
+    <h2>Quem vai te guiar?</h2>
+    <p>Eu sou o Eliã. Gosto de contar histórias que mexem com a alma e agora, quero te ensinar a transformar essas
+      histórias em vídeos que emocionam, impactam e podem até viralizar.
+      Mesmo que você nunca tenha editado nada antes, fica tranquilo: eu explico tudo com uma linguagem simples e
+      moderna.
+      Se você tem uma mensagem forte dentro de você, mas não sabe como colocá-la no mundo... esse curso é pra você."</p>
+  </section>
+
+  <section class="final-cta">
+    <a href="https://pay.kiwify.com.br/NJzXZCj" target="_blank" class="cta-button">Acessar Agora por
+      Apenas R$19,99</a>
+  </section>
+
+  <footer>
+    &copy; 2025 Vídeos Virais com IA. Todos os direitos reservados.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
